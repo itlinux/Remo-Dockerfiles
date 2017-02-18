@@ -1,6 +1,6 @@
 #Install Apache
 FROM centos:latest
-MAINTAINER remo@mattei.org
+MAINTAINER remo at mattei dot org
 LABEL version="1.0" description="This is a sample apache build for CentOS 7"
 
 RUN yum update -y

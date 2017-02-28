@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo "Pulling Wordpress image"
+
+docker pull wordpress
+
+echo "Pulling Mariadb10 Image"
+docker pull mariadb
+
+echo "installing mariadb container"
+docker run --name mariadb  -e MYSQL_ROOT_PASSWORD=remo -d mariadb
+
+sleep 15
+
+echo "installing  wordpress container"
+
+docker run --name wordpress --link mariadb:mariadb  -p 2080:80 -e WORDPRESS_DB_PASSWORD=remo -e WORDPRESS_DB_NAME=wpdb -e WORDPRESS_DB_HOST=mariadb -d wordp
+ress
+
+docker ps |egrep "mariadb|wordpress"
+

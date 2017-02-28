@@ -1,0 +1,18 @@
+version: "2"
+services:
+  wordpress:
+    image: wordpress
+    container_name: wordpress
+    links:
+     - maria_db:mariadb
+    ports:
+     - 2080:80
+    environment:
+      WORDPRESS_DB_HOST: mariadb
+      WORDPRESS_DB_NAME: wpdb
+      WORDPRESS_DB_PASSWORD: remo 
+  maria_db:
+    image: mariadb
+    container_name: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: remo

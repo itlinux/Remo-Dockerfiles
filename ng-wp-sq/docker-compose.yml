@@ -1,0 +1,30 @@
+version: "2"
+services:
+  nginxlb:
+    image: nginx
+    container_name: nginx-wp
+    links:
+     - maria_db:mariadb-n
+     - wordpress:wordpress-n
+    ports:
+     - 80:80
+    volumes:
+     - ./default-config/:/etc/nginx/conf.d/
+  wordpress:
+    image: wordpress
+    container_name: wordpress-n
+    links:
+     - maria_db:mariadb1
+    ports:
+     - 2080:80
+    environment:
+      WORDPRESS_DB_HOST: mariadb-n
+      WORDPRESS_DB_NAME: wpdb
+      WORDPRESS_DB_PASSWORD: remo 
+    volumes:
+    - /home/casa/wordpress:/var/www/html
+  maria_db:
+    image: mariadb
+    container_name: mariadb-n
+    environment:
+      MYSQL_ROOT_PASSWORD: remo
